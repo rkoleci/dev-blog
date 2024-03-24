@@ -12,6 +12,8 @@ export const generateStaticParams = async () => {
 }
 
 export default function Page({ params }: { params: { page: string } }) {
+  console.log(123)
+
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageNumber = parseInt(params.page as string)
   const initialDisplayPosts = posts.slice(

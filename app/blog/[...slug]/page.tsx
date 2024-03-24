@@ -13,6 +13,7 @@ import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
+import { promises as fs } from 'fs'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -80,7 +81,13 @@ export const generateStaticParams = async () => {
   return paths
 }
 
+export const getData = async () => {}
+
 export default async function Page({ params }: { params: { slug: string[] } }) {
+  const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8')
+  const data = JSON.parse(file)
+  console.log(111111, { data })
+
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
