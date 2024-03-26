@@ -1,6 +1,7 @@
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
+import { promises as fs } from 'fs'
 
 const POSTS_PER_PAGE = 5
 
@@ -11,9 +12,7 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default function Page({ params }: { params: { page: string } }) {
-  console.log(123)
-
+export default async function Page({ params }: { params: { page: string } }) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageNumber = parseInt(params.page as string)
   const initialDisplayPosts = posts.slice(

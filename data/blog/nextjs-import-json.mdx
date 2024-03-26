@@ -1,0 +1,117 @@
+---
+title: 'How to read data from local JSON file?'
+date: '2024-02-05'
+lastmod: '2024-02-05'
+tags: ['nextjs', 'import', 'local', 'json']
+draft: false
+summary: 'How to Load Data from a File in Next.js'
+images: ['/static/images/twitter-card.png']
+layout: PostSimple
+authors: ['default']
+---
+
+This tutorial demonstrates how to retrieve data from a local JSON file within a Next.js application and use its contents.
+
+# Nextjs 14 (AppRouter)
+
+## 1 - Create JSON file
+
+```
+{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York"
+}
+```
+
+Put the data.json file inside /app folder of project.
+
+## 2 - Import Libraries
+
+We need the **promise** from **fs** module.
+
+```
+import { promises as fs } from 'fs';
+```
+
+## 3 - Read the JSON file
+
+Inside your Page component read the data with await.
+
+```
+import { promises as fs } from 'fs';
+
+export default async function Page() {
+	  const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
+	  const data = JSON.parse(file);
+
+		return (
+		    <div>
+		      <h1>{data.name}</h1>
+		      <p>{data.city}</p>
+		    </div>
+		  );
+}
+```
+
+Data will be read from JSON file on every page reload or at build time.
+
+This is the solution for all types of Nextjs 14 pages, Static, Incremental etc.
+
+That's all!
+
+# Nextjs 13 (Pages Router)
+
+In older versions of Nextjs, you need to read the JSON file inside of `getStaticProps` or `getServerSideProps`.
+
+`getStaticProps` will read the data at build time only once. Use this if data.json will almost never change.
+
+```
+export const getStaticProps = async () => {
+	const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
+	const data = JSON.parse(file);
+
+	return {
+		data: data
+		}
+	}
+
+export  default  function  Page({ data }) {
+	return (
+			<div>
+				<h1>{data.name}</h1>
+				<p>{data.city}</p>
+			</div>
+		);
+}
+```
+
+`getServerSideProps ` will read the data everytime client loads the page, so data will be updated all the time.
+
+```
+export const getServerSideProps = async () => {
+	const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
+	const data = JSON.parse(file);
+
+	return {
+		data: data
+		}
+	}
+
+export  default  function  Page({ data }) {
+	return (
+			<div>
+				<h1>{data.name}</h1>
+				<p>{data.city}</p>
+			</div>
+		);
+}
+```
+
+## Bad Practice
+
+```
+import file from '../app/data.json';
+```
+
+Like this Nextjs does not guarantee data is up to date.

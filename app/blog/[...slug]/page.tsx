@@ -81,13 +81,7 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export const getData = async () => {}
-
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8')
-  const data = JSON.parse(file)
-  console.log(111111, { data })
-
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
