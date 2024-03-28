@@ -2,29 +2,27 @@
 title: 'How to Copy to Clipboard in Neovim? - Fast Way'
 date: '2024-02-05'
 lastmod: '2024-02-05'
-tags: ['neovim', 'copy',  'paste', 'clipboard']
+tags: ['neovim', 'copy', 'paste', 'clipboard']
 draft: false
-summary: 'NeoVim has it's own clipboard memory so coping from it and pasting to another system might not always work as you expect it.'
+summary: 'NeoVim has its own clipboard memory so coping from it and pasting to another system might not always work as you expect it.'
 images: ['/static/images/twitter-card.png']
 layout: PostSimple
 authors: ['default']
 ---
 
-How to Copy to Clipboard NeoVim ?
-
 NeoVim has it's own clipboard memory so coping from it and pasting to another system might not always work as you expect it.
 
-How to Copy from NeoVim editor ?
+## How to Copy from NeoVim editor ?
 
 1. Open file with command `nvim students.txt`
 2. Press `Esc`
 3. Press `v`
-4. Use keys h, j, k, l to select text
+4. Use keys `h, j, k, l` to select text
 5. Press `"*y` to yank (copy) selected text
 
-Fast way
+## Fast way
 
-First setup you nvim editor like this:
+First setup your nvim editor like this:
 
 1. Navigate and open ~/.config/nvim/init.vim
 2. Add below code
@@ -35,31 +33,40 @@ let mapleader=","
 vnoremap  <leader>y  "*y
 ```
 
+3. Save and close file
+4. Restart terminal
 
-How to setup Clipboard for Neovim ?
+## How to setup Clipboard for Neovim ?
 
 If you want to use the same clipboard for system and nvim, you can do it like this:
 
-Mac
+### Mac
 
 Run this in terminal:
+
 ```
 set clipboard+=unnamedplus
 ```
 
-Windows
+### Windows
 
-Download clipboard here. // https://github.com/equalsraf/win32yank
-Run this command: 
+Download clipboard [here](https://github.com/equalsraf/win32yank).
+Run this command:
+
 ```
 set clipboard+=unnamedplus
 ```
 
-Linux
+### Linux
+
 Run this two commands:
+
 ```
 sudo apt install wl-clipboard
 ```
+
 ```
 set clipboard+=unnamedplus
 ```
+
+Now you should be able to use the system clipboard inside neovim as well.
