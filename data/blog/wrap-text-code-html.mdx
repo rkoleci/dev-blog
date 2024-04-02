@@ -1,0 +1,63 @@
+---
+title: 'How to wrap text in code tag in HTML ?'
+date: '2024-02-05'
+lastmod: '2024-02-05'
+tags: ['wrap', 'text',  'code', 'tag', 'html']
+draft: false
+summary: 'This short tutorial demonstrates how to wrap text in code tag in HTML.'
+images: ['/static/images/twitter-card.png']
+layout: PostSimple
+authors: ['default']
+---
+ 
+
+This short tutorial demonstrates how to wrap text in code tag in HTML.
+
+Follow along.
+
+There are a few ways to do this.
+
+
+## Code tag
+
+The `code` tag is used to define a piece of computer code. The content inside is displayed in the browser's default monospace font.
+
+```
+console.log('Hello world')
+```  
+
+## Pre tag
+You can also use `pre` tag to reach the same outcome.
+```
+console.log('Hello world')
+```
+
+## CSS to keep text formatting
+
+### Before
+```
+pre { 
+	overflow-x: auto; 
+	white-space: pre-wrap; 
+	white-space: -moz-pre-wrap; 
+	white-space: -pre-wrap; 
+	white-space: -o-pre-wrap; 
+	word-wrap: break-word;
+} 
+```
+
+### After CSS
+
+```
+pre { overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; }
+```
+
+## Markdown
+
+You can use three quotes to create a code tag in markdown (.md).
+
+```` 
+```
+console.log('Thanks for reading!')
+```
+````
